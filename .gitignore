@@ -11,3 +11,6 @@ Velo_Zyn_compra_venta.xlsx
 # hacía muy pesado el envío. Si lo querés respaldar en GitHub, borrá esta
 # línea y subilo aparte.
 *.afdesign
+
+# Originales de diseño: se quedan en la compu, el sitio usa los de img/
+style/

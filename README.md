@@ -1,7 +1,14 @@
 # POUCH CLUB® — catálogo
 
+**En línea: https://tetomorris.github.io/pouch-club/**
+Panel de stock: https://tetomorris.github.io/pouch-club/admin.html
+
 Catálogo web para vender VELO y ZYN por WhatsApp. No tiene servidor ni base de
-datos: son archivos sueltos que se suben a GitHub Pages y listo.
+datos: son archivos sueltos que se sirven desde GitHub Pages.
+
+> **Falta lo más importante:** poner tu número de WhatsApp (ver el punto 1).
+> Hasta que lo cambies, el botón de enviar avisa que falta configurarlo en vez
+> de abrir un chat equivocado.
 
 ---
 
@@ -21,16 +28,29 @@ de abrir un chat equivocado.
 
 ---
 
-## 2. Subirlo a GitHub Pages
+## 2. Publicar los cambios
 
-1. Creá un repositorio nuevo en GitHub.
-2. Subí **todo** el contenido de esta carpeta (arrastrar y soltar en la web de
-   GitHub funciona).
-3. En el repo: **Settings → Pages → Source: Deploy from a branch →
-   rama `main`, carpeta `/ (root)`** → Save.
-4. En un par de minutos queda en `https://TUUSUARIO.github.io/NOMBREDELREPO/`.
+Ya está todo montado: repositorio `tetomorris/pouch-club`, rama `main`, GitHub
+Pages activo. Para que un cambio salga en vivo:
 
-Cada vez que cambiás un archivo en GitHub, el sitio se actualiza solo en ~1 min.
+```bash
+git add -A
+git commit -m "lo que cambiaste"
+git push
+```
+
+En aproximadamente un minuto queda publicado. También podés editar un archivo
+directo en la web de GitHub y se actualiza igual.
+
+**Si el `push` se corta** (`error 408` o `curl 56`), es la conexión, no el
+repositorio: pasa cuando la subida está lenta y el envío tarda más de lo que
+GitHub espera. Reintentar más tarde suele alcanzar. Evitá subir archivos
+pesados: las imágenes del sitio están comprimidas a propósito.
+
+El Excel `Velo_Zyn_compra_venta.xlsx` **no se sube**: está en `.gitignore`
+porque el repositorio es público y ese archivo tiene costos, márgenes y el
+reparto entre socios. Lo mismo con la carpeta `style/` original y el archivo
+de Affinity.
 
 ---
 
