@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>POUCH CLUB® — Nicotine Pouches</title>
+<meta name="description" content="Velo y Zyn en Costa Rica. Pedí por WhatsApp, girá la ruleta y desbloqueá premios del club.">
+<meta name="theme-color" content="#06402B">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="img/logo-redondo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<meta property="og:title" content="POUCH CLUB® — Nicotine Pouches">
+<meta property="og:description" content="Velo y Zyn en Costa Rica. Pedí por WhatsApp y girá la ruleta del club.">
+<meta property="og:image" content="img/icono-512.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,100,400..900;0,110,400..900;1,110,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<!-- ===================== GRANO / TEXTURA ===================== -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ===================== PANTALLA DE CARGA =====================
+     Va en el HTML y no inyectada por JS, para que no haya un parpadeo de la
+     página antes de aparecer. El seguro de CSS (animación "loaderFailsafe")
+     la retira sola a los 9 s aunque el JavaScript nunca llegue a correr, así
+     que no puede dejar el sitio trabado. -->
+<div class="loader" id="loader">
+  <div class="loader__grid" aria-hidden="true"></div>
+  <div class="loader__box">
+    <img src="img/logo-mark-cream.png" alt="Pouch Club" class="loader__logo">
+    <div class="loader__bar"><i id="loader-bar"></i></div>
+    <div class="loader__meta">
+      <span>Cargando</span>
+      <b id="loader-pct">0%</b>
+    </div>
+  </div>
+  <span class="loader__pie">Nicotine pouches · Costa Rica</span>
+</div>
+
+<!-- ===================== PUERTA +18 ===================== -->
+<div class="agegate" id="agegate" role="dialog" aria-modal="true" aria-labelledby="agegate-t">
+  <div class="agegate__card">
+    <img src="img/logo-mark-cream.png" alt="Pouch Club" class="agegate__logo">
+    <h1 id="agegate-t">¿Sos mayor de 18?</h1>
+    <p>Este sitio muestra productos con nicotina. Solo para mayores de edad. No pedimos ningún dato tuyo.</p>
+    <div class="agegate__btns">
+      <button class="btn btn--gold" id="age-yes">Sí, soy mayor de 18</button>
+      <a class="btn btn--ghost-cream" href="https://www.google.com">No</a>
+    </div>
+    <small>La nicotina es una sustancia adictiva.</small>
+  </div>
+</div>
+
+<!-- ===================== HEADER ===================== -->
+<header class="hdr" id="hdr">
+  <a class="hdr__logo" href="#top" aria-label="Pouch Club inicio">
+    <img src="img/logo-mark-cream.png" alt="POUCH CLUB" class="hdr__logo--light">
+    <img src="img/logo-mark.png" alt="" class="hdr__logo--dark" aria-hidden="true">
+  </a>
+  <nav class="hdr__nav">
+    <a href="#catalogo">Catálogo</a>
+    <!-- se revela cuando hay algo en el carrito -->
+    <a href="#ruleta" data-ruleta hidden>Ruleta</a>
+  </nav>
+  <button class="cartbtn" id="cartbtn" aria-label="Abrir carrito">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12l-1.2 11.1a2 2 0 0 1-2 1.9H9.2a2 2 0 0 1-2-1.9L6 7Z"/><path d="M9 7V5.8A3 3 0 0 1 12 3a3 3 0 0 1 3 2.8V7"/></svg>
+    <span class="cartbtn__txt">Carrito</span>
+    <span class="cartbtn__count" id="cartcount">0</span>
+  </button>
+</header>
+
+<main id="top">
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="hero">
+  <div class="hero__grid" aria-hidden="true"><i></i></div>
+  <div class="hero__glow" aria-hidden="true"></div>
+  <div class="hero__cans" id="herocans" aria-hidden="true"></div>
+
+  <div class="hero__inner">
+    <span class="eyebrow in-up" style="--d:0s">Costa Rica · Entrega coordinada</span>
+    <h1 class="hero__title">
+      <span class="in-up" style="--d:.11s">Every Pouch</span>
+      <span class="in-up" style="--d:.27s">Has Its</span>
+      <span class="in-up hero__title--gold" style="--d:.43s">Place.</span>
+    </h1>
+    <p class="hero__sub in-up" style="--d:.65s">
+      En Pouch Club ofrecemos pouches de nicotina de las marcas VELO y ZYN.
+    </p>
+    <ul class="hero__stats">
+      <li class="in-up" style="--d:.79s"><strong id="stat-marcas">2</strong><span>marcas</span></li>
+      <li class="in-up" style="--d:.91s"><strong id="stat-intensidades">3</strong><span>intensidades</span></li>
+      <li class="in-up" style="--d:1.02s"><strong><span class="col">₡</span>6K</strong><span>desde</span></li>
+    </ul>
+    <div class="hero__cta in-up" style="--d:1.16s">
+      <a href="#catalogo" class="btn btn--gold btn--lg">Ver el catálogo</a>
+      <button class="btn btn--ghost btn--lg hero__ruleta" data-open-wheel data-ruleta hidden>Girar la ruleta</button>
+    </div>
+  </div>
+
+  <div class="hero__scroll" aria-hidden="true"><span></span>scroll</div>
+</section>
+
+<!-- ===================== MARQUEE ===================== -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track" id="marqueetrack"></div>
+</div>
+
+<!-- ===================== CATÁLOGO ===================== -->
+<section class="sec" id="catalogo">
+  <div class="sec__head reveal">
+    <span class="eyebrow eyebrow--dark">01 / Catálogo</span>
+    <h2 class="sec__title">Escogé tu sabor</h2>
+  </div>
+
+  <div class="filters reveal" id="filters" role="tablist" aria-label="Filtrar productos"></div>
+
+  <div class="grid" id="grid"></div>
+
+  <p class="grid__empty" id="gridempty" hidden>No hay nada con ese filtro. Probá con otro.</p>
+</section>
+
+<!-- ===================== RULETA ===================== -->
+<section class="sec sec--dark" id="ruleta" data-ruleta hidden>
+  <div class="sec__head sec__head--centro reveal">
+    <span class="eyebrow">02 / Club Spin</span>
+    <h2 class="sec__title">Girá y desbloqueá</h2>
+    <p class="sec__desc">Girá y desbloqueá promos y premios exclusivos.
+      Tenés un giro por semana.</p>
+  </div>
+
+  <div class="spin-promo reveal">
+    <div class="spin-promo__wheel" id="wheelteaser" aria-hidden="true"></div>
+    <button class="btn btn--gold btn--lg" id="spinbtn" data-open-wheel>Girar ahora</button>
+    <p class="spin-promo__note" id="spinnote">Un giro gratis cada 7 días por dispositivo.</p>
+  </div>
+</section>
+
+<!-- ===================== CÓMO PEDIR ===================== -->
+<!-- OCULTA POR AHORA. Para volver a mostrarla, borrá el atributo hidden de
+     esta línea y el enlace "Cómo pedir" del menú de arriba. -->
+<section class="sec" id="como" hidden>
+  <div class="sec__head reveal">
+    <span class="eyebrow eyebrow--dark">03 / Cómo pedir</span>
+    <h2 class="sec__title">Tres pasos y listo</h2>
+  </div>
+  <ol class="steps">
+    <li class="step reveal" style="--d:0s">
+      <span class="step__n">01</span>
+      <h3>Armá tu caja</h3>
+      <p>Agregá las latas que querés. El carrito te lleva la cuenta y te avisa si queda poco stock.</p>
+    </li>
+    <li class="step reveal" style="--d:.1s">
+      <span class="step__n">02</span>
+      <h3>Girá la ruleta</h3>
+      <p>Antes de enviar, probá suerte. Si ganás, el código queda pegado a tu pedido automáticamente.</p>
+    </li>
+    <li class="step reveal" style="--d:.2s">
+      <span class="step__n">03</span>
+      <h3>Mandalo por WhatsApp</h3>
+      <p>Se abre el chat con todo escrito. Ahí coordinamos entrega y pago. No guardamos ningún dato tuyo.</p>
+    </li>
+  </ol>
+</section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="ftr">
+  <img src="img/logo-mark-cream.png" alt="Pouch Club" class="ftr__logo">
+  <div class="ftr__cols">
+    <div class="ftr__col">
+      <h4>El club</h4>
+      <a href="#catalogo">Catálogo</a>
+      <a href="#ruleta" data-ruleta hidden>Ruleta</a>
+    </div>
+    <div class="ftr__col">
+      <h4>Contacto</h4>
+      <a href="#" data-wa-link>WhatsApp</a>
+    </div>
+  </div>
+  <div class="ftr__legal">
+    <p><strong>Producto con nicotina.</strong> Venta exclusiva a mayores de 18 años. La nicotina es una sustancia química adictiva. No recomendado para no fumadores, embarazadas ni personas con condiciones cardíacas.</p>
+    <p>© <span id="year"></span> Pouch Club® · Los precios están en colones costarricenses.</p>
+  </div>
+</footer>
+
+<!-- ===================== CARRITO ===================== -->
+<div class="scrim" id="scrim" hidden></div>
+
+<aside class="cart" id="cart" aria-label="Carrito" aria-hidden="true">
+  <header class="cart__head">
+    <h2>Tu pedido</h2>
+    <button class="cart__clear" id="cartclear" hidden>Vaciar</button>
+    <button class="iconbtn" id="cartclose" aria-label="Cerrar carrito">
+      <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </header>
+
+  <div class="cart__body" id="cartbody"></div>
+
+  <div class="cart__foot">
+    <div class="cart__prize" id="cartprize" hidden></div>
+    <div class="cart__total">
+      <span>Total</span>
+      <strong id="carttotal">₡0</strong>
+    </div>
+    <button class="btn btn--wa btn--lg btn--full" id="checkout">
+      <svg viewBox="0 0 24 24" class="btn__wa" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.95L2 22l5.2-1.5A9.9 9.9 0 1 0 12.04 2Zm5.8 14.1c-.25.7-1.45 1.34-2 1.4-.53.06-1.2.08-1.94-.12a16 16 0 0 1-1.76-.65c-3.1-1.34-5.12-4.47-5.28-4.68-.15-.2-1.26-1.67-1.26-3.19 0-1.51.8-2.26 1.08-2.57a1.1 1.1 0 0 1 .8-.37h.58c.18 0 .43-.07.67.51l.92 2.23c.07.16.12.34.02.54l-.34.56-.5.54c-.15.16-.32.33-.14.65.18.31.8 1.32 1.72 2.14 1.18 1.05 2.18 1.38 2.49 1.53.31.16.5.14.68-.08l.97-1.13c.22-.26.4-.2.68-.1l1.9.9c.28.14.46.21.53.32.07.12.07.67-.18 1.37Z"/></svg>
+      <span id="checkouttxt">Girar y enviar pedido</span>
+    </button>
+    <p class="cart__micro">Se abre WhatsApp con el pedido escrito. No se envía nada sin que vos lo confirmes.</p>
+  </div>
+</aside>
+
+<!-- ===================== MODAL RULETA ===================== -->
+<div class="wheelmodal" id="wheelmodal" role="dialog" aria-modal="true" aria-label="Ruleta Pouch Club" hidden>
+  <div class="wheelmodal__inner">
+    <button class="iconbtn iconbtn--light wheelmodal__x" id="wheelclose" aria-label="Cerrar">
+      <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+
+    <span class="eyebrow">Giro del club</span>
+    <h2 class="wheelmodal__title">Probá tu suerte</h2>
+
+    <div class="wheelwrap">
+      <canvas id="wheel" width="620" height="620" aria-hidden="true"></canvas>
+      <button class="wheelgo" id="wheelgo">
+        <span>GIRAR</span>
+      </button>
+    </div>
+
+    <div class="wheelresult" id="wheelresult" hidden></div>
+
+    <p class="wheelmodal__note" id="wheelnote">Un giro cada 7 días. Sin registro, sin datos.</p>
+  </div>
+  <canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
+</div>
+
+<!-- ============ BARRA DE PEDIDO (solo móvil) ============ -->
+<button class="minicart" id="minicart" hidden>
+  <span class="minicart__n" id="minicart-n">0</span>
+  <span class="minicart__t">Ver mi pedido</span>
+  <strong class="minicart__p" id="minicart-p"></strong>
+</button>
+
+<!-- ===================== CONFIRMAR ===================== -->
+<div class="ask" id="ask" role="dialog" aria-modal="true" aria-labelledby="ask-t" hidden>
+  <div class="ask__card">
+    <h3 id="ask-t"></h3>
+    <p id="ask-p"></p>
+    <div class="ask__btns">
+      <button class="btn btn--dark" id="ask-no">Cancelar</button>
+      <button class="btn btn--gold" id="ask-si">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== TOAST ===================== -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="data/products.js"></script>
+<script src="assets/js/can.js"></script>
+<script src="assets/js/wheel.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

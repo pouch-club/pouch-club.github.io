@@ -1,0 +1,13 @@
+.DS_Store
+
+# ---------------------------------------------------------------------------
+# NO subir: el repositorio es público para que GitHub Pages pueda servirlo.
+# Este archivo tiene costos, márgenes y el reparto de ganancias entre socios.
+# El sitio no lo necesita: los datos del catálogo viven en data/products.js
+# ---------------------------------------------------------------------------
+Velo_Zyn_compra_venta.xlsx
+
+# Archivo fuente de Affinity Designer (2,9 MB). El sitio no lo necesita y
+# hacía muy pesado el envío. Si lo querés respaldar en GitHub, borrá esta
+# línea y subilo aparte.
+*.afdesign
