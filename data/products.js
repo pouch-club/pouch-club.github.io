@@ -23,7 +23,7 @@ window.POUCH_DATA = {
   config: {
     // Número de WhatsApp en formato internacional, SOLO dígitos.
     // Costa Rica = 506 + los 8 dígitos. Ej: "50688887777"
-    whatsapp: "50600000000",
+    whatsapp: "50686710161",
 
     // Texto con el que arranca el mensaje de WhatsApp
     saludo: "¡Hola Pouch Club! Quiero hacer un pedido 🌿",
