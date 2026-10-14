@@ -330,6 +330,12 @@ registro: "https://script.google.com/macros/s/.../exec"
 Para comprobar que quedó bien, abrí esa dirección en el navegador: tiene que
 responder "Registro de Pouch Club activo" con la hora.
 
+**Si cambiás el script más adelante**
+
+Guardar no alcanza: la dirección sigue sirviendo la versión vieja. Hay que ir a
+**Deploy → Manage deployments**, tocar el lápiz, en *Version* elegir **New
+version** y darle **Deploy**. La dirección no cambia.
+
 **Lo que hay que tener claro**
 
 - El aviso sale **después** de abrir WhatsApp y sin esperar respuesta
