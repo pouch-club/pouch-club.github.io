@@ -1,7 +1,6 @@
 # POUCH CLUB® — catálogo
 
 **En línea: https://tetomorris.github.io/pouch-club/**
-Panel de stock: https://tetomorris.github.io/pouch-club/admin.html
 
 Catálogo web para vender VELO y ZYN por WhatsApp. No tiene servidor ni base de
 datos: son archivos sueltos que se sirven desde GitHub Pages.
@@ -58,16 +57,16 @@ de Affinity.
 
 Dos formas. Las dos terminan en lo mismo: actualizar `data/products.js`.
 
-**Opción A — el panel (más cómodo)**
+**Opción A — el panel, desde tu computadora**
 
-Entrá a `https://tusitio.../admin.html`. Ahí ajustás el stock con `+` y `–`,
-cambiás las probabilidades de la ruleta y la configuración. Cuando terminás,
-tocás **Descargar products.js** y subís ese archivo a GitHub reemplazando
+El panel **no se publica**. Está en `.gitignore` a propósito: si estuviera en
+línea, cualquiera que supiera la dirección podría abrirlo.
+
+Para usarlo, levantá el servidor local (ver el punto 9) y entrá a
+`http://localhost:8000/admin.html`. Ahí ajustás precios, stock, las
+probabilidades de la ruleta y la configuración. Cuando terminás, tocás
+**Descargar products.js** y subís ese archivo a GitHub reemplazando
 `data/products.js`.
-
-El panel no está enlazado desde ningún lado del sitio: solo llega quien conoce
-la dirección. No es una contraseña real, pero tampoco hay nada que romper desde
-ahí: lo único que hace es generarte un archivo.
 
 **Opción B — a mano**
 
@@ -259,7 +258,7 @@ y volvé a poner el enlace `Cómo pedir` en el menú de arriba.
 
 ```
 index.html              el catálogo
-admin.html              el panel de stock (no está enlazado)
+admin.html              el panel de precios y stock (NO se publica)
 data/products.js        LOS DATOS — es lo único que vas a editar seguido
 assets/css/styles.css   todos los estilos
 assets/js/app.js        carrito, filtros, intro, mensaje de WhatsApp

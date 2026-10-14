@@ -14,3 +14,8 @@ Velo_Zyn_compra_venta.xlsx
 
 # Originales de diseño: se quedan en la compu, el sitio usa los de img/
 style/
+
+# El panel NO se publica: quedaría accesible para cualquiera que supiera la
+# dirección. Vive solo en esta computadora; se abre con el servidor local.
+# Los cambios del catálogo se hacen editando data/products.js.
+admin.html
