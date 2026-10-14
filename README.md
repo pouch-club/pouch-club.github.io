@@ -156,14 +156,16 @@ en 100 %.
 
 ## 6. Fotos de los productos
 
-Las seis latas usan **fotos oficiales** de cada producto, recortadas con fondo
+Las latas usan **fotos oficiales** de cada producto, recortadas con fondo
 transparente y en la intensidad exacta que vos vendés — los puntitos impresos en
 la lata coinciden con los mg de la tarjeta. Están en `img/`, una por producto:
 
 ```
-img/velo-watermelon-ice.png        img/velo-purple-grape.png
-img/velo-freezing-peppermint.png   img/zyn-mini-spearmint.png
-img/velo-blueberry-ice.png         img/zyn-wintergreen.png
+img/velo-watermelon-ice.png           img/velo-crispy-peppermint.png
+img/velo-freezing-peppermint.png      img/velo-strawberry-ice.png
+img/velo-blueberry-ice.png            img/velo-freezing-peppermint-14.png
+img/velo-purple-grape.png             img/zyn-mini-spearmint.png
+img/zyn-wintergreen.png
 ```
 
 **Para poner fotos tuyas:** reemplazá el archivo con el mismo nombre. Nada más.

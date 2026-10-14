@@ -288,10 +288,17 @@
   })();
 
   (function stats() {
-    var marcas = {}, niveles = {};
-    VISIBLES.forEach(function (p) { marcas[p.marca] = 1; niveles[p.fuerza] = 1; });
+    var marcas = {}, niveles = {}, minimo = Infinity;
+    VISIBLES.forEach(function (p) {
+      marcas[p.marca] = 1;
+      niveles[p.fuerza] = 1;
+      if (p.precio < minimo) minimo = p.precio;
+    });
     $("#stat-marcas").textContent = Object.keys(marcas).length;
     $("#stat-intensidades").textContent = Object.keys(niveles).length;
+    /* "desde" sale del precio más bajo que haya, no de un número escrito a mano */
+    $("#stat-desde").innerHTML = '<span class="col">₡</span>' +
+      (minimo % 1000 === 0 ? (minimo / 1000) + "K" : fmtH(minimo).replace(/^<span[^>]*>₡<\/span>/, ""));
   })();
   $("#year").textContent = new Date().getFullYear();
 

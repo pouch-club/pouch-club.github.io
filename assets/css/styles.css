@@ -62,6 +62,11 @@ svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.9;stroke
 
 /* el signo de colón: Archivo no lo trae, se dibuja con Inter */
 .col{font-family:var(--f-body);font-weight:600;font-size:.84em;letter-spacing:0;margin-right:.05em;display:inline-block;transform:translateY(-.03em)}
+/* El ₡ es un inline-block, así que crea un punto de corte y en pantallas
+   angostas el símbolo quedaba en una línea y el monto en la siguiente.
+   Todo lo que lleve precio va sin cortes. */
+.price,.citem__price,.cart__total strong,.minicart__p,.hero__stats strong,
+.wheelresult h3,.prize-nowrap{white-space:nowrap}
 
 h1,h2,h3,h4{
   font-family:var(--f-disp);font-weight:800;
