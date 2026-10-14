@@ -496,21 +496,24 @@ h1,h2,h3,h4{
 .card__name{font-size:clamp(17px,1.9vw,21px);margin:6px 0 11px;letter-spacing:-.02em}
 .card__note{font-size:13.2px;line-height:1.5;color:var(--char-soft);margin:0 0 15px;flex:1}
 
-.card__meta{display:flex;align-items:center;gap:11px;margin-bottom:14px;flex-wrap:wrap;margin-top:auto}
-.meta{display:flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--char-soft);font-weight:600}
+.card__meta{display:flex;align-items:center;gap:11px;margin-bottom:14px;flex-wrap:nowrap;margin-top:auto}
+.meta{display:flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--char-soft);font-weight:600;white-space:nowrap}
 .dots{display:flex;gap:3px}
 .dots i{width:6px;height:6px;border-radius:50%;background:var(--stone-dk)}
 .dots i.on{background:var(--forest)}
 
-.card__buy{display:flex;align-items:center;gap:12px;margin-top:auto}
+.card__buy{display:flex;align-items:center;gap:10px;margin-top:auto}
 .price{font-family:var(--f-disp);font-weight:900;font-size:21px;letter-spacing:-.02em;line-height:1}
-.price small{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--char-soft);display:block;margin-top:3px}
+
 .card__add{
-  margin-left:auto;padding:11px 17px;border-radius:100px;
+  margin-left:auto;flex:none;display:inline-flex;align-items:center;gap:7px;
+  padding:10px 16px 10px 13px;border-radius:100px;
   background:var(--forest);color:var(--cream);font-family:var(--f-disp);font-weight:800;
   font-size:12.5px;letter-spacing:.07em;text-transform:uppercase;
   transition:all .3s var(--ease);
 }
+.card__add svg{width:15px;height:15px;stroke-width:2.6;flex:none}
+.card__add--off{padding:10px 16px}
 .card__add:hover{background:var(--gold);color:var(--forest-dk);transform:translateY(-2px);box-shadow:0 10px 20px -8px rgba(212,162,28,.85)}
 .card__add:disabled{background:var(--stone-dk);color:rgba(31,42,36,.42);cursor:not-allowed;transform:none;box-shadow:none}
 
@@ -784,7 +787,14 @@ body.intro-lock{overflow:hidden}
   .card__note{display:none}
   .card__meta{gap:9px;margin-bottom:12px}
   .price{font-size:20px}
-  .card__add{padding:10px 14px;font-size:11px}
+  /* La tarjeta en dos columnas no da para precio + botón con texto: el botón
+     se queda solo con el símbolo y "Fuerza" se cae, que los puntos ya se
+     entienden solos. */
+  .meta__lbl{display:none}
+  .card__add{width:38px;height:38px;padding:0;gap:0;justify-content:center}
+  .card__add span{display:none}
+  .card__add svg{width:17px;height:17px}
+  .card__add--off{width:auto;height:auto;padding:9px 13px;font-size:10.5px}
   .card__buy{gap:7px}
   .stepper button{width:28px;height:28px}
   .cart{width:100%;border-radius:0}
@@ -826,7 +836,6 @@ body.intro-lock{overflow:hidden}
 }
 @media (max-width:380px){
   .grid{grid-template-columns:1fr 1fr;gap:10px}
-  .card__add span{display:none}
 }
 
 @media (prefers-reduced-motion:reduce){

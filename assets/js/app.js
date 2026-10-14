@@ -446,15 +446,17 @@
     if (agotado) tags += '<span class="tag tag--out">Agotado</span>';
     else if (bajo) tags += '<span class="tag tag--low">Quedan ' + p.stock + '</span>';
 
+    var mas = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
     var accion = agotado
-      ? '<button class="card__add" disabled>Agotado</button>'
+      ? '<button class="card__add card__add--off" disabled>Agotado</button>'
       : (enCarrito
           ? '<div class="stepper">' +
               '<button data-minus="' + p.id + '" aria-label="Quitar uno"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg></button>' +
               '<span>' + enCarrito + '</span>' +
               '<button data-plus="' + p.id + '" aria-label="Agregar uno"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>' +
             '</div>'
-          : '<button class="card__add" data-plus="' + p.id + '">Agregar</button>');
+          : '<button class="card__add" data-plus="' + p.id + '" aria-label="Agregar ' +
+            p.sabor + ' al pedido">' + mas + '<span>Add</span></button>');
 
     return '' +
     '<article class="card reveal' + (agotado ? " is-out" : "") + '" data-id="' + p.id + '" ' +
@@ -469,10 +471,10 @@
         '<h3 class="card__name">' + p.sabor + '</h3>' +
         '<div class="card__meta">' +
           '<span class="meta">' + p.nicotina + '</span>' +
-          '<span class="meta">Fuerza ' + fuerzaDots(p) + '</span>' +
+          '<span class="meta"><span class="meta__lbl">Fuerza</span>' + fuerzaDots(p) + '</span>' +
         '</div>' +
         '<div class="card__buy">' +
-          '<span class="price">' + fmtH(p.precio) + '<small>por lata</small></span>' +
+          '<span class="price">' + fmtH(p.precio) + '</span>' +
           accion +
         '</div>' +
       '</div>' +
