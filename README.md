@@ -265,6 +265,7 @@ assets/css/styles.css   todos los estilos
 assets/js/app.js        carrito, filtros, intro, mensaje de WhatsApp
 assets/js/wheel.js      la ruleta (canvas), el reparto de gajos y el confeti
 assets/js/can.js        dibuja las latas de respaldo
+registro/               el script de Google para el registro (opcional)
 img/                    las fotos de los productos y los logos
 favicon.ico             el escudo redondo, para la pestaña del navegador
 style/                  los originales que me pasaste (logos y paleta PDF)
@@ -289,6 +290,60 @@ Eso borra el giro guardado y el premio, y podés volver a girar. **Funciona
 únicamente en localhost o en tu red local**: en el sitio publicado en GitHub
 Pages esa dirección no hace absolutamente nada, así que nadie puede usarla para
 girar de más.
+
+---
+
+## 8c. Registro de premios y pedidos
+
+Esto es **opcional** y viene apagado. Sin configurar, el sitio no manda nada a
+ningún lado.
+
+El sitio es estático: no tiene servidor, así que por sí solo no puede guardar
+nada. Para llevar registro hace falta algo que reciba los datos. La forma más
+simple y gratis es una hoja de Google.
+
+**Qué queda registrado**
+
+| Pestaña | Cuándo se escribe |
+|---|---|
+| `Premios` | Cada vez que la ruleta entrega un código, **aunque esa persona después no compre** |
+| `Pedidos` | Cada vez que alguien toca enviar por WhatsApp |
+
+Con fecha y hora de Costa Rica, puesta por Google y no por el celular de quien
+compra.
+
+**Cómo armarlo (una sola vez)**
+
+1. Creá una hoja nueva en [Google Sheets](https://sheets.new).
+2. Menú **Extensiones → Apps Script**. Borrá lo que haya y pegá todo el
+   contenido de `registro/google-apps-script.js`.
+3. Botón **Implementar → Nueva implementación**. Tipo: **Aplicación web**.
+   En "Quién tiene acceso" elegí **Cualquier usuario**. Dale Implementar y
+   aceptá los permisos que pida.
+4. Copiá la dirección que te queda (termina en `/exec`) y pegala en
+   `data/products.js`:
+
+```js
+registro: "https://script.google.com/macros/s/.../exec"
+```
+
+Para comprobar que quedó bien, abrí esa dirección en el navegador: tiene que
+responder "Registro de Pouch Club activo" con la hora.
+
+**Lo que hay que tener claro**
+
+- El aviso sale **después** de abrir WhatsApp y sin esperar respuesta
+  (`sendBeacon`), así que no retrasa nada: medido en 52 microsegundos, contra
+  los 16.700 que dura un cuadro de pantalla.
+- Si Google está caído, si no hay señal o si un bloqueador lo frena, **el
+  pedido se manda igual**. El registro nunca es un requisito.
+- Por lo mismo, es un registro de apoyo, **no contabilidad**: como nadie
+  espera la confirmación, algún evento suelto puede perderse. La verdad de lo
+  que vendiste sigue siendo lo que te llega por WhatsApp.
+- No se guarda ningún dato personal, porque el sitio no pide ninguno: solo qué
+  se pidió, cuánto y cuándo.
+
+Para apagarlo, dejá `registro: ""`.
 
 ---
 

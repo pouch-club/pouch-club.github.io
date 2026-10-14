@@ -61,6 +61,39 @@
   var VISIBLES = PRODUCTOS.filter(function (p) { return !p.hidden; });
 
   /* =========================================================================
+     REGISTRO
+     -------------------------------------------------------------------------
+     Anota premios y pedidos en una hoja de Google. Está pensado para no
+     costarle NADA de tiempo a quien compra:
+
+       · sendBeacon encola el dato y devuelve el control en el acto. No abre
+         conexión, no espera respuesta y no toca el hilo principal.
+       · Se llama SIEMPRE después de abrir WhatsApp, nunca antes.
+       · Va dentro de un try: si Google está caído, si no hay señal o si un
+         bloqueador lo frena, el pedido sigue su curso igual.
+       · Con config.registro vacío no hace absolutamente nada.
+
+     La hora que vale es la que pone el script del lado de Google, con la zona
+     de Costa Rica: la del dispositivo puede estar mal o en otro huso.
+     ========================================================================= */
+  function registrar(tipo, datos) {
+    try {
+      var url = CFG.registro;
+      if (!url) return;
+      var cuerpo = JSON.stringify({
+        tipo: tipo,
+        datos: datos,
+        horaDispositivo: new Date().toISOString()
+      });
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(url, new Blob([cuerpo], { type: "text/plain;charset=UTF-8" }));
+      } else if (window.fetch) {
+        fetch(url, { method: "POST", mode: "no-cors", keepalive: true, body: cuerpo });
+      }
+    } catch (e) { /* el registro nunca puede romper una venta */ }
+  }
+
+  /* =========================================================================
      TOAST
      ========================================================================= */
   var toastEl = $("#toast"), toastT;
@@ -693,6 +726,28 @@
     return L.join("\n");
   }
 
+  /* el pedido en datos sueltos, para el registro */
+  function resumenPedido() {
+    var lineas = [], unidades = 0;
+    for (var id in cart) {
+      var p = byId(id);
+      if (!p) continue;
+      unidades += cart[id];
+      lineas.push({ cantidad: cart[id], producto: p.marca + " " + p.sabor,
+                    nicotina: p.nicotina, total: p.precio * cart[id] });
+    }
+    var r = { lineas: lineas, unidades: unidades, total: cartTotal() };
+    if (premioEnCarrito() && WINTER) {
+      r.premio = premio.titulo;
+      r.codigo = premio.code;
+      r.premioCantidad = premio.cantidad;
+      r.premioPrecio = premio.precio;
+      unidades += premio.cantidad;
+      r.unidades = unidades;
+    }
+    return r;
+  }
+
   function waURL() {
     return "https://wa.me/" + CFG.whatsapp + "?text=" + encodeURIComponent(mensaje());
   }
@@ -704,8 +759,13 @@
     }
     var url = waURL();
     var llevabaPremio = premioEnCarrito();
+    var resumen = resumenPedido();
+
     var w = window.open(url, "_blank", "noopener");
     if (!w) window.location.href = url;   // si el navegador bloquea la pestaña
+
+    /* recién acá, con WhatsApp ya abierto */
+    registrar("pedido", resumen);
 
     /* el código ya viajó: no vuelve a engancharse a un segundo pedido */
     if (llevabaPremio) {
@@ -824,6 +884,13 @@
       LS.set("premioFuera", true);
       LS.set("premioUsado", false);
       LS.set("ultimoGiro", Date.now());
+
+      registrar("premio", {
+        premio: ganado.titulo,
+        codigo: ganado.code,
+        cantidad: ganado.cantidad,
+        precio: ganado.precio
+      });
 
       rueda.celebrate(pr.id !== "nada");
       if (pr.id !== "nada") window.PouchConfetti($("#confetti"), { count: pr.id === "gratis" ? 220 : 140 });

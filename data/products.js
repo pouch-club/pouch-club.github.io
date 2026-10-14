@@ -32,7 +32,14 @@ window.POUCH_DATA = {
     stockBajo: 3,
 
     // Días que deben pasar para poder volver a girar la ruleta
-    diasEntreGiros: 7
+    diasEntreGiros: 7,
+
+    // ---------------------------------------------------------------------
+    // REGISTRO (opcional). Dirección del script de Google que anota los
+    // premios y los pedidos. Vacío = apagado: el sitio funciona igual y no
+    // manda nada a ningún lado. Los pasos para crearlo están en el README.
+    // ---------------------------------------------------------------------
+    registro: ""
   },
 
   productos: [
