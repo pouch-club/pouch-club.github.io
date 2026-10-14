@@ -62,6 +62,12 @@ code{font-family:var(--f-disp);font-weight:700;letter-spacing:.05em}
 .step{display:flex;align-items:center;gap:3px;background:var(--stone);border-radius:100px;padding:4px}
 .step button{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:17px;font-weight:700;line-height:1}
 .step button:hover{background:rgba(31,42,36,.12)}
+.moneda{display:flex;align-items:center;gap:2px;background:var(--stone);border-radius:100px;
+  padding:4px 12px 4px 11px;flex:none}
+.moneda span{font-family:var(--f-body);font-weight:600;font-size:13px;color:var(--soft)}
+.moneda input{width:62px;border:0;background:none;font-family:var(--f-disp);font-weight:800;
+  font-size:15px;text-align:left;-moz-appearance:textfield}
+.moneda input::-webkit-outer-spin-button,.moneda input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 .step input{width:50px;text-align:center;border:0;background:none;font-family:var(--f-disp);font-weight:800;font-size:16px;-moz-appearance:textfield}
 .step input::-webkit-outer-spin-button,.step input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 
@@ -139,8 +145,8 @@ code{font-family:var(--f-disp);font-weight:700;letter-spacing:.05em}
   </div>
 
   <section class="card">
-    <h2>Stock</h2>
-    <p class="hint">Lo que pongas acá es lo que ve la gente. En 0 aparece “Agotado” y no se puede agregar al carrito.</p>
+    <h2>Precios y stock</h2>
+    <p class="hint">Precio y existencias de cada producto. Con stock en 0 aparece “Agotado” y no se puede agregar al carrito.</p>
     <div id="filas"></div>
     <div class="totals">
       <div><b id="t-latas">0</b><span>latas en stock</span></div>
@@ -228,11 +234,14 @@ code{font-family:var(--f-disp);font-weight:700;letter-spacing:.05em}
         '<div class="row__art" style="background:linear-gradient(150deg,'+p.color+','+shade(p.color,-.45)+')">'+
           '<img src="'+window.PouchCan.src(p)+'" alt=""></div>'+
         '<div class="row__id"><b>'+p.marca+' '+p.sabor+'</b>'+
-          '<span>'+p.nicotina+' · '+fmtH(p.precio)+(p.hidden?' · solo ruleta':'')+'</span></div>'+
+          '<span>'+p.nicotina+(p.hidden?' · solo ruleta':'')+'</span></div>'+
         '<span class="pill '+(p.hidden?"pill--hidden":cls)+'">'+(p.hidden?"Oculto":txt)+'</span>'+
+        '<label class="moneda"><span>₡</span>'+
+          '<input type="number" min="0" step="100" value="'+p.precio+'" data-precio="'+i+'" aria-label="Precio">'+
+        '</label>'+
         '<div class="step">'+
           '<button data-i="'+i+'" data-d="-1" aria-label="Restar">&ndash;</button>'+
-          '<input type="number" min="0" max="999" value="'+p.stock+'" data-stock="'+i+'">'+
+          '<input type="number" min="0" max="999" value="'+p.stock+'" data-stock="'+i+'" aria-label="Stock">'+
           '<button data-i="'+i+'" data-d="1" aria-label="Sumar">+</button>'+
         '</div></div>';
     }).join("");
@@ -271,7 +280,10 @@ code{font-family:var(--f-disp);font-weight:700;letter-spacing:.05em}
   /* ---------- cambios ---------- */
   function nCambios(){
     var n=0;
-    D.productos.forEach(function(p,i){ if(p.stock!==ORIG.productos[i].stock) n++ });
+    D.productos.forEach(function(p,i){
+      if(p.stock!==ORIG.productos[i].stock) n++;
+      if(p.precio!==ORIG.productos[i].precio) n++;
+    });
     D.ruleta.forEach(function(p,i){ if(p.peso!==ORIG.ruleta[i].peso) n++ });
     ["whatsapp","saludo","stockBajo","diasEntreGiros"].forEach(function(k){
       if(String(D.config[k])!==String(ORIG.config[k])) n++ });
@@ -287,8 +299,8 @@ code{font-family:var(--f-disp);font-weight:700;letter-spacing:.05em}
   function reemplazarEnFuente(txt){
     var out=txt;
     D.productos.forEach(function(p){
-      var re=new RegExp('(id:\\s*"'+p.id+'"[\\s\\S]{0,700}?stock:\\s*)(\\d+)');
-      out=out.replace(re,"$1"+p.stock);
+      out=out.replace(new RegExp('(id:\\s*"'+p.id+'"[\\s\\S]{0,700}?stock:\\s*)(\\d+)'),"$1"+p.stock);
+      out=out.replace(new RegExp('(id:\\s*"'+p.id+'"[\\s\\S]{0,700}?precio:\\s*)(\\d+)'),"$1"+p.precio);
     });
     D.ruleta.forEach(function(p){
       var re=new RegExp('(\\{\\s*id:\\s*"'+p.id+'",\\s*peso:\\s*)(\\d+)');
@@ -369,6 +381,10 @@ code{font-family:var(--f-disp);font-weight:700;letter-spacing:.05em}
       D.productos[+t.dataset.stock].stock=Math.max(0,Math.min(999,parseInt(t.value,10)||0));
       totales(); marcar(); return;
     }
+    if(t.dataset.precio!==undefined){
+      D.productos[+t.dataset.precio].precio=Math.max(0,parseInt(t.value,10)||0);
+      totales(); marcar(); return;
+    }
     if(t.dataset.peso!==undefined){
       D.ruleta[+t.dataset.peso].peso=Math.max(0,parseInt(t.value,10)||0);
       pintarPremios(); marcar(); return;
@@ -381,7 +397,9 @@ code{font-family:var(--f-disp);font-weight:700;letter-spacing:.05em}
   $("#descargar").addEventListener("click",descargar);
   $("#descargar2").addEventListener("click",descargar);
   $("#deshacer").addEventListener("click",function(){
-    D.productos.forEach(function(p,i){p.stock=ORIG.productos[i].stock});
+    D.productos.forEach(function(p,i){
+      p.stock=ORIG.productos[i].stock; p.precio=ORIG.productos[i].precio;
+    });
     D.ruleta.forEach(function(p,i){p.peso=ORIG.ruleta[i].peso});
     D.config=JSON.parse(JSON.stringify(ORIG.config));
     pintarFilas();pintarPremios();pintarConfig();marcar();
