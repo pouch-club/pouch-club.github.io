@@ -39,7 +39,7 @@ window.POUCH_DATA = {
     // premios y los pedidos. Vacío = apagado: el sitio funciona igual y no
     // manda nada a ningún lado. Los pasos para crearlo están en el README.
     // ---------------------------------------------------------------------
-    registro: ""
+    registro: "https://script.google.com/macros/s/AKfycbybiK9M9_RurYnQp3FnXr686ug3Fp4yR226S5HtH8Uf3IASA-7dSHZpMmrkBm8UFyA3tw/exec"
   },
 
   productos: [
