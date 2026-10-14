@@ -25,22 +25,19 @@ function doPost(e) {
     const cuando = Utilities.formatDate(new Date(), ZONA, 'dd/MM/yyyy HH:mm:ss');
 
     if (cuerpo.tipo === 'premio') {
-      const h = hoja(libro, 'Premios',
-                     ['Fecha y hora (CR)', 'Código', 'Premio', 'Latas', 'Precio']);
-      h.appendRow([cuando, datos.codigo || '', datos.premio || '',
-                   datos.cantidad || '', precio(datos.precio)]);
-      colones(h, 5);
+      hoja(libro, 'Premios',
+           ['Fecha y hora (CR)', 'Código', 'Premio', 'Latas', 'Precio'])
+        .appendRow([cuando, datos.codigo || '', datos.premio || '',
+                    datos.cantidad || '', precio(datos.precio)]);
 
     } else if (cuerpo.tipo === 'pedido') {
       const detalle = (datos.lineas || [])
         .map(l => l.cantidad + ' x ' + l.producto + ' (' + l.nicotina + ')')
         .join('  ·  ');
-      const h = hoja(libro, 'Pedidos',
-                     ['Fecha y hora (CR)', 'Latas', 'Total', 'Detalle',
-                      'Código del premio', 'Premio']);
-      h.appendRow([cuando, datos.unidades || '', datos.total || '', detalle,
-                   datos.codigo || '', datos.premio || '']);
-      colones(h, 3);
+      hoja(libro, 'Pedidos',
+           ['Fecha y hora (CR)', 'Latas', 'Total', 'Detalle', 'Código del premio', 'Premio'])
+        .appendRow([cuando, datos.unidades || '', datos.total || '', detalle,
+                    datos.codigo || '', datos.premio || '']);
     }
 
     return ContentService.createTextOutput('ok');
@@ -72,15 +69,4 @@ function hoja(libro, nombre, cabecera) {
 function precio(v) {
   if (v === 0) return 'GRATIS';
   return v || '';
-}
-
-/**
- * Deja una columna con formato de colones.
- * El valor se guarda como NÚMERO y solo se cambia cómo se ve: así se puede
- * seguir sumando, promediando y filtrando. Si fuera texto ya formateado,
- * la hoja no podría hacer cuentas con él.
- */
-function colones(h, columna) {
-  const filas = Math.max(h.getMaxRows() - 1, 1);
-  h.getRange(2, columna, filas, 1).setNumberFormat('"₡"#,##0');
 }
