@@ -5,7 +5,31 @@
 (function () {
   "use strict";
 
+  /* -------------------------------------------------------------------------
+     Red de seguridad del archivo de datos.
+     Si data/products.js tiene un error de escritura (una coma de menos, una
+     comilla sin cerrar), el navegador descarta el archivo entero y el sitio
+     se queda sin productos SIN avisar nada: el catálogo aparece vacío y
+     parece que todo está bien. Eso es una tienda que no vende y nadie se
+     entera. Acá se corta antes y se avisa.
+     ------------------------------------------------------------------------- */
   var D = window.POUCH_DATA;
+  if (!D || !D.config || !(D.productos instanceof Array) || !D.productos.length) {
+    console.error(
+      "POUCH CLUB: no se pudo leer data/products.js.\n" +
+      "Suele ser una coma, una comilla o una llave de más o de menos.\n" +
+      "Revisá el último cambio que hiciste en ese archivo.");
+    var aviso = document.getElementById("grid");
+    if (aviso) {
+      aviso.innerHTML =
+        '<p class="grid__empty"><strong>Estamos actualizando el catálogo.</strong><br>' +
+        'Volvé en un rato, o escribinos y te armamos el pedido.</p>';
+    }
+    var vacios = document.querySelectorAll("#filters, #spinbtn");
+    for (var v = 0; v < vacios.length; v++) vacios[v].innerHTML = "";
+    return;
+  }
+
   var CFG = D.config;
   var PRODUCTOS = D.productos;
   var PREMIOS = D.ruleta;
