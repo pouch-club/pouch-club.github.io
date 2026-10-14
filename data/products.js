@@ -26,7 +26,7 @@ window.POUCH_DATA = {
     whatsapp: "50686710161",
 
     // Texto con el que arranca el mensaje de WhatsApp
-    saludo: "¡Hola Pouch Club! Quiero hacer un pedido 🌿",
+    saludo: "¡Hola! Quisiera hacer un pedido 🌿",
 
     // Umbral para mostrar la etiqueta "últimas unidades"
     stockBajo: 3,

@@ -672,15 +672,12 @@
      hay, y el total a pagar. */
   function mensaje() {
     var L = [CFG.saludo, "", "MI PEDIDO"];
-    var unidades = 0;
     for (var id in cart) {
       var p = byId(id);
       if (!p) continue;
-      unidades += cart[id];
-      L.push("• " + cart[id] + " × " + p.marca + " " + p.sabor + " (" + p.nicotina + ")" +
-             "  —  " + fmt(p.precio) + " c/u  =  " + fmt(p.precio * cart[id]));
+      L.push("• " + cart[id] + " × " + p.marca + " " + p.sabor +
+             " (" + p.nicotina + ") — " + fmt(p.precio * cart[id]));
     }
-    L.push("Subtotal (" + unidades + (unidades === 1 ? " lata" : " latas") + "): " + fmt(subtotal()));
 
     if (premioEnCarrito() && WINTER) {
       L.push("");
@@ -688,7 +685,7 @@
       L.push(premio.titulo);
       L.push("Código: " + premio.code);
       L.push("• " + premio.cantidad + " × " + WINTER.marca + " " + WINTER.sabor +
-             " (" + WINTER.nicotina + ")  —  " +
+             " (" + WINTER.nicotina + ") — " +
              (premio.precio === 0 ? "GRATIS" : fmt(premio.precio)));
     }
     L.push("");
