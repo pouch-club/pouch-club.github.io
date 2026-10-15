@@ -1,9 +1,13 @@
 # POUCH CLUB® — catálogo
 
-**En línea: https://tetomorris.github.io/pouch-club/**
+**En línea: https://pouch-club.github.io/**
 
 Catálogo web para vender VELO y ZYN por WhatsApp. No tiene servidor ni base de
 datos: son archivos sueltos que se sirven desde GitHub Pages.
+
+Código de **Stefano Morice** ([@tetomorris](https://github.com/tetomorris)).
+El repositorio se alojó primero en esa cuenta y después se pasó a la de la
+marca; el historial de commits conserva la autoría original.
 
 > **Falta lo más importante:** poner tu número de WhatsApp (ver el punto 1).
 > Hasta que lo cambies, el botón de enviar avisa que falta configurarlo en vez
@@ -29,8 +33,8 @@ de abrir un chat equivocado.
 
 ## 2. Publicar los cambios
 
-Ya está todo montado: repositorio `tetomorris/pouch-club`, rama `main`, GitHub
-Pages activo. Para que un cambio salga en vivo:
+Ya está todo montado: repositorio `pouch-club/pouch-club.github.io`, rama
+`main`, GitHub Pages activo. Para que un cambio salga en vivo:
 
 ```bash
 git add -A
